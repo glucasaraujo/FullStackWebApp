@@ -1,0 +1,57 @@
+@page
+@model FullStackWebApp.Pages_Pessoas.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Editar Pessoa</h1>
+
+<h4>Pessoa</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Pessoa.Id" />
+            <div class="form-group">
+                <label asp-for="Pessoa.Nome" class="control-label"></label>
+                <input asp-for="Pessoa.Nome" class="form-control" />
+                <span asp-validation-for="Pessoa.Nome" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Pessoa.Idade" class="control-label"></label>
+                <input asp-for="Pessoa.Idade" class="form-control" />
+                <span asp-validation-for="Pessoa.Idade" class="text-danger"></span>
+            </div>
+
+            <br />
+            <h4>Dependentes</h4>
+            <div id="dependentes">
+                @for (int i = 0; i < Model.Dependentes.Count; i++)
+                {
+                    <div class="form-group">
+                        <label asp-for="@Model.Dependentes[i].Nome" class="control-label">Nome</label>
+                        <input asp-for="@Model.Dependentes[i].Nome" class="form-control" />
+                        <span asp-validation-for="@Model.Dependentes[i].Nome" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.Dependentes[i].Idade" class="control-label">Idade</label>
+                        <input asp-for="@Model.Dependentes[i].Idade" class="form-control" />
+                        <span asp-validation-for="@Model.Dependentes[i].Idade" class="text-danger"></span>
+                    </div>
+                    <input type="hidden" asp-for="@Model.Dependentes[i].Id" />
+                    <input type="hidden" asp-for="@Model.Dependentes[i].PessoaId" value="@Model.Pessoa.Id" />
+                }
+            </div>
+            </br>
+
+            <div class="form-group">
+                <input type="submit" value="Salvar" class="btn btn-primary" />
+                <a class="btn btn-success" asp-page="./Index">Voltar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+

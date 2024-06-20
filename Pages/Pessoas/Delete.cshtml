@@ -1,0 +1,65 @@
+@page
+@model FullStackWebApp.Pages_Pessoas.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Deletar Pessoa</h1>
+
+<h3>Você tem certeza que deseja deletar esta pessoa e seus dependentes?</h3>
+<div>
+    <h4>Pessoa</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Pessoa.Nome)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Pessoa.Nome)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Pessoa.Idade)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Pessoa.Idade)
+        </dd>
+    </dl>
+
+
+    <div>
+        <h4>Dependentes</h4>
+        <hr />
+        @if (Model.Dependentes != null && Model.Dependentes.Count > 0)
+        {
+            <dl class="row">
+                @foreach (var dependente in Model.Dependentes)
+                {
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => dependente.Nome)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => dependente.Nome)
+                    </dd>
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => dependente.Idade)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => dependente.Idade)
+                    </dd>
+                    <hr />
+                }
+            </dl>
+        }
+        else
+        {
+            <p>Sem dependentes disponiveis.</p>
+        }
+    </div>
+
+    <form method="post">
+        <input type="hidden" asp-for="Pessoa.Id" />
+        <input type="submit" value="Delete" class="btn btn-danger" />
+        <a class="btn btn-success" asp-page="./Index">Voltar</a>
+    </form>
+</div>

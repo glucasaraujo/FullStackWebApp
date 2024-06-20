@@ -1,0 +1,73 @@
+@page
+@model FullStackWebApp.Pages_Pessoas.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Pessoas</h1>
+
+@if (!string.IsNullOrEmpty(TempData["SuccessMessage"] as string))
+{
+    <div id="SuccessMessage" class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["SuccessMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Pessoa[0].Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pessoa[0].Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pessoa[0].Idade)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Pessoa)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Idade)
+                </td>
+                <td>
+                    <a class="btn btn-primary" asp-page="./Edit" asp-route-id="@item.Id">Editar</a>
+                    <a class="btn btn-info" asp-page="./Details" asp-route-id="@item.Id">Detalhes</a>
+                    <a class="btn btn-danger" asp-page="./Delete" asp-route-id="@item.Id">Deletar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<p>
+    <a class="btn btn-success" asp-page="Create">Criar Pessoa</a>
+</p>
+
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            var SuccessMessage = $('#SuccessMessage');
+            if (SuccessMessage.length) {
+                setTimeout(function () {
+                    SuccessMessage.fadeOut('slow', function () {
+                        $(this).alert('close');
+                    });
+                }, 1500); 
+            }
+        });
+    </script>
+}

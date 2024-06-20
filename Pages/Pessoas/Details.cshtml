@@ -1,0 +1,62 @@
+@page
+@model FullStackWebApp.Pages_Pessoas.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Detalhes</h1>
+
+<div>
+    <h4>Pessoa</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Pessoa.Nome)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Pessoa.Nome)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Pessoa.Idade)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Pessoa.Idade)
+        </dd>
+
+    </dl>
+</div>
+
+<div>
+    <h4>Dependentes</h4>
+    <hr />
+    @if (Model.Dependentes != null && Model.Dependentes.Count > 0)
+    {
+        <dl class="row">
+            @foreach (var dependente in Model.Dependentes)
+            {
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => dependente.Nome)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => dependente.Nome)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => dependente.Idade)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => dependente.Idade)
+                </dd>
+                <hr class="col-sm-12" style="margin-top: 10px; margin-bottom: 10px;" />
+            }
+        </dl>
+    }
+    else
+    {
+        <p>Sem dependentes disponíveis.</p>
+    }
+</div>
+<div>
+    <a class="btn btn-primary" asp-page="./Edit" asp-route-id="@Model.Pessoa?.Id">Editar</a>
+    <a class="btn btn-success" asp-page="./Index">Voltar</a>
+</div>
